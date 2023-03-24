@@ -1,27 +1,29 @@
 package me.mrfunny.krab.members.method.body;
 
 import me.mrfunny.krab.JavaObject;
-import me.mrfunny.krab.members.common.HasBody;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class MethodScope<T> implements JavaObject {
+public abstract class BasicMethodScope<T> implements JavaObject {
     protected List<Statement> statements = null;
+
+    public void setStatements(List<Statement> statements) {
+        this.statements = statements;
+    }
+
     @Override
     public String toJavaCode() {
         if(statements == null) statements = Collections.emptyList();
         StringBuilder builder = new StringBuilder("{");
         for (Statement statement : statements) {
-            builder.append(statement.toJavaCode());
-            if(!(statement instanceof HasBody)) {
+            builder.append(Expression.rootExpressionToJavaCode(statement));
+            if(!(statement instanceof BranchableStatement)) {
                 builder.append(";");
             }
         }
-        builder.append("}");
 
-        return builder.toString();
+        return builder.append("}").toString();
     }
 
     public T addStatement(Statement statement) {

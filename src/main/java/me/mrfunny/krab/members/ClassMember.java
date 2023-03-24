@@ -2,6 +2,7 @@ package me.mrfunny.krab.members;
 
 import me.mrfunny.krab.JavaObject;
 import me.mrfunny.krab.Krab;
+import me.mrfunny.krab.members.common.Type;
 
 public abstract class ClassMember<T extends ClassMember<T>>
         extends Accessible<T>

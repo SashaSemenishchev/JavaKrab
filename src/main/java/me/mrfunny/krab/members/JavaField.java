@@ -1,5 +1,6 @@
 package me.mrfunny.krab.members;
 
+import me.mrfunny.krab.members.common.Type;
 import me.mrfunny.krab.members.method.body.Expression;
 
 public class JavaField extends ClassMember<JavaField> {

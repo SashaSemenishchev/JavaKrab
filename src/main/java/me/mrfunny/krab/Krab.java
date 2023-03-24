@@ -2,6 +2,8 @@ package me.mrfunny.krab;
 
 import me.mrfunny.krab.exception.KrabException;
 import me.mrfunny.krab.members.*;
+import me.mrfunny.krab.members.common.Type;
+import me.mrfunny.krab.members.method.JavaMethod;
 import me.mrfunny.krab.members.method.body.Body;
 import me.mrfunny.krab.members.method.JavaConstructor;
 
@@ -39,6 +41,11 @@ public class Krab extends Accessible<Krab> implements JavaObject, Abstractable<K
 
     public Krab addField(JavaField field) {
         addMember(field);
+        return this;
+    }
+
+    public Krab addMethod(JavaMethod method) {
+        addMember(method);
         return this;
     }
 
@@ -101,8 +108,8 @@ public class Krab extends Accessible<Krab> implements JavaObject, Abstractable<K
         return isAbstract;
     }
 
-    public Krab setInnerMode(boolean mode) {
-        this.innerMode = mode;
+    protected Krab setInnerMode() {
+        this.innerMode = true;
         return this;
     }
 
@@ -134,7 +141,7 @@ public class Krab extends Accessible<Krab> implements JavaObject, Abstractable<K
 
     public static Krab innerClass(String name) {
         return new Krab(null, name, null)
-                .setInnerMode(true)
+                .setInnerMode()
                 .setStatic(true);
     }
 

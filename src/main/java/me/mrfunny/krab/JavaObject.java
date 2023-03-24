@@ -8,7 +8,6 @@ public interface JavaObject {
      * @return String representation of valid java code of this object
      */
     String toJavaCode();
-
     default String toPrettyJavaCode() {
         String code = toJavaCode();
         try {

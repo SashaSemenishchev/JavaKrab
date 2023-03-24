@@ -13,7 +13,7 @@ public abstract class Accessible<T> {
     protected boolean isFinal;
     protected boolean isStatic;
     protected String name;
-    public T access(AccessModifier accessModifier) {
+    public T setAccess(AccessModifier accessModifier) {
         this.accessModifier = accessModifier;
         return (T) this;
     }

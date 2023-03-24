@@ -1,7 +1,7 @@
 package me.mrfunny.krab.members.method.body.environment;
 
 import me.mrfunny.krab.exception.KrabException;
-import me.mrfunny.krab.members.Type;
+import me.mrfunny.krab.members.common.Type;
 import me.mrfunny.krab.members.method.body.Expression;
 
 public class LocalVariable implements MethodBodyPart {
