@@ -1,7 +1,8 @@
 package me.mrfunny.krab.members.method.body.expression;
 
 import me.mrfunny.krab.members.method.body.Expression;
-import me.mrfunny.krab.members.method.body.ResultiveExpression;
+import me.mrfunny.krab.members.method.body.possibilities.ResultiveExpression;
+import me.mrfunny.krab.members.method.body.statement.BraceGroupStatement;
 
 public class ComparisonExpression extends Expression implements ResultiveExpression {
     private Expression expression2;
@@ -31,11 +32,16 @@ public class ComparisonExpression extends Expression implements ResultiveExpress
 
     @Override
     public String toJavaCode() {
-        return Expression.rootExpressionToJavaCode(expression1) + comparisonMode.getJavaCode() + Expression.rootExpressionToJavaCode(expression2);
+        return Expression.toString(expression1) + comparisonMode.getJavaCode() + Expression.toString(expression2);
     }
 
     @Override
     public Class<?> getExpressionResult() {
         return boolean.class;
+    }
+
+    @Override
+    public ConcatenationExpression concat(Expression other) {
+        return new ConcatenationExpression(new BraceGroupStatement(this), other);
     }
 }

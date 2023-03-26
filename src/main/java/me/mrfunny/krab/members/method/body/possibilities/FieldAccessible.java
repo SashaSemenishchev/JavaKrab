@@ -1,6 +1,8 @@
-package me.mrfunny.krab.members.method.body;
+package me.mrfunny.krab.members.method.body.possibilities;
 
 import me.mrfunny.krab.members.JavaField;
+import me.mrfunny.krab.members.method.body.Expression;
+import me.mrfunny.krab.members.method.body.MemberPathExpression;
 import me.mrfunny.krab.members.method.body.expression.FieldAccessExpression;
 
 public interface FieldAccessible extends MemberPathExpression, Comparable {

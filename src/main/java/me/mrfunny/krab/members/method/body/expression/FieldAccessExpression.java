@@ -2,10 +2,13 @@ package me.mrfunny.krab.members.method.body.expression;
 
 import me.mrfunny.krab.members.common.Type;
 import me.mrfunny.krab.members.method.body.*;
+import me.mrfunny.krab.members.method.body.possibilities.Callable;
+import me.mrfunny.krab.members.method.body.possibilities.FieldAccessible;
+import me.mrfunny.krab.members.method.body.possibilities.ResultiveExpression;
 
 public class FieldAccessExpression
         extends Expression
-        implements ResultiveExpression, Callable, FieldAccessible {
+    implements ResultiveExpression, Callable, FieldAccessible {
 
     private  Type staticType = null;
     protected String name;
@@ -22,6 +25,8 @@ public class FieldAccessExpression
     public String toJavaCode() {
         return (staticType == null ? "" : staticType.toJavaCode() + ".") + name;
     }
+
+
 
     @Override
     public Class<?> getExpressionResult() { return Object.class; }

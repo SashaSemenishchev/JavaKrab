@@ -6,8 +6,6 @@ import me.mrfunny.krab.members.AccessModifier;
 import me.mrfunny.krab.members.ClassMember;
 import me.mrfunny.krab.members.common.Type;
 import me.mrfunny.krab.members.method.body.Body;
-import me.mrfunny.krab.members.method.body.BranchableStatement;
-import me.mrfunny.krab.members.method.body.Statement;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -16,7 +14,7 @@ import java.util.List;
 
 public class JavaMethod extends ClassMember<JavaMethod> implements Abstractable<JavaMethod> {
     protected boolean isAbstract = false;
-    protected Body body = null;
+    protected Body body = Body.empty();
     protected List<MethodArgument> arguments = new LinkedList<>();
 
     public JavaMethod(AccessModifier accessModifier, Type returnType, boolean isFinal, boolean isStatic, String name) {
@@ -69,7 +67,7 @@ public class JavaMethod extends ClassMember<JavaMethod> implements Abstractable<
 
     @Override
     public String createAccessString() {
-        StringBuilder builder = new StringBuilder(getAccessModifier().getJavaName());
+        StringBuilder builder = new StringBuilder(getAccessModifier().toJavaCode());
         if(isStatic()) {
             builder.append(" static");
         }

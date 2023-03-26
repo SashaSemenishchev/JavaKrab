@@ -1,5 +1,6 @@
-package me.mrfunny.krab.members.method.body;
+package me.mrfunny.krab.members.method.body.possibilities;
 
+import me.mrfunny.krab.members.method.body.Expression;
 import me.mrfunny.krab.members.method.body.expression.ComparisonExpression;
 import me.mrfunny.krab.members.method.body.expression.ComparisonMode;
 

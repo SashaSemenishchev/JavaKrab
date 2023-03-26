@@ -37,36 +37,53 @@ public class KrabTest {
 //        assertEquals(krab.getAccessModifier(), AccessModifier.PUBLIC);
         PrintWriter writer = new PrintWriter("TestClass.java");
         String code = Krab.newSource("me.mrfunny", "TestClass")
-                .setAccess(AccessModifier.PUBLIC)
-                .addMethod(JavaMethod.of("main", Type.of(void.class))
-                        .setAccess(AccessModifier.PUBLIC)
-                        .setArguments(MethodArgument.of(Type.of(String.class).asArray(), "args"))
-                        .setStatic(true)
-                        .setBody(Body.of(
+            .setAccessModifier(AccessModifier.PUBLIC)
+            .addConstructor(AccessModifier.PUBLIC, Body.of(
+                Type.of(System.class)
+                    .accessField("out")
+                    .call("println", string("Hello World"))
+            ))
+            .addMethod(JavaMethod.of("main", Type.VOID)
+                .setAccessModifier(AccessModifier.PUBLIC)
+                .setArguments(MethodArgument.of(Type.of(String.class).asArrayType(), "args"))
+                .setStatic(true)
+                .setBody(Body.of(
+                    Type.of(System.class)
+                        .accessField("out")
+                        .call("println", string("Hello World!")),
+                    declareLocalVariable(
+                        Type.INT,
+                        "random",
+                        Type.of(ThreadLocalRandom.class)
+                            .call("current")
+                            .call("nextInt")
+                    ),
+                    ifStatement(
+                        conditionBranch(
+                            accessLocalVariable("random")
+                                .compare(num(100), ComparisonMode.LESS),
+                            Body.scope(
                                 Type.of(System.class)
-                                        .accessField("out")
-                                        .call("println", string("Hello World!")),
-                                ifStatement(conditionBranch(
-                                        Type.of(ThreadLocalRandom.class)
-                                                .call("current")
-                                                .compare(num(100), ComparisonMode.LESS),
-                                        Body.scope(
-                                                Type.of(System.class)
-                                                        .accessField("out")
-                                                        .call("println", string("Random number is less than 100"))
-                                        )
-                                )).addElseIf(conditionBranch(Type.of(ThreadLocalRandom.class)
-                                                        .call("nextBoolean"), Body.scope(
-                                                        thisClass().call("another")
-                                                )
-                                        )
-                                ).ifElse(Body.scope(
-                                        thisClass().call("nothing")
-                                ))
-                        ))
+                                    .accessField("out")
+                                    .call(
+                                        "println",
+                                        string("Random number is less than 100. Got: ").concat(accessLocalVariable("random"))
+                                    )
+                            )
+                    )).addElseIf(conditionBranch(
+                        Type.of(ThreadLocalRandom.class)
+                            .call("current")
+                            .call("nextBoolean"),
+                        Body.scope(call("another"))
+                    )).ifElse(Body.scope(
+                        call("nothing")
+                    ))
+                ))
 
-                )
-                .toPrettyJavaCode();
+            )
+            .addMethod(JavaMethod.of("another", Type.VOID).setStatic(true))
+            .addMethod(JavaMethod.of("nothing", Type.VOID).setStatic(true))
+            .toPrettyJavaCode();
         writer.write(code);
         writer.close();
     }

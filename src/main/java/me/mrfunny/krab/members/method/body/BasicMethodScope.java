@@ -1,6 +1,7 @@
 package me.mrfunny.krab.members.method.body;
 
-import me.mrfunny.krab.JavaObject;
+import me.mrfunny.krab.common.JavaObject;
+import me.mrfunny.krab.members.method.body.possibilities.BranchableStatement;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +18,7 @@ public abstract class BasicMethodScope<T> implements JavaObject {
         if(statements == null) statements = Collections.emptyList();
         StringBuilder builder = new StringBuilder("{");
         for (Statement statement : statements) {
-            builder.append(Expression.rootExpressionToJavaCode(statement));
+            builder.append(Expression.toString(statement));
             if(!(statement instanceof BranchableStatement)) {
                 builder.append(";");
             }

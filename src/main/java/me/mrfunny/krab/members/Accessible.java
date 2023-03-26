@@ -13,7 +13,7 @@ public abstract class Accessible<T> {
     protected boolean isFinal;
     protected boolean isStatic;
     protected String name;
-    public T setAccess(AccessModifier accessModifier) {
+    public T setAccessModifier(AccessModifier accessModifier) {
         this.accessModifier = accessModifier;
         return (T) this;
     }
@@ -40,7 +40,7 @@ public abstract class Accessible<T> {
     }
 
     public String createAccessString() {
-        StringBuilder builder = new StringBuilder(getAccessModifier().getJavaName());
+        StringBuilder builder = new StringBuilder(getAccessModifier().toJavaCode());
         if(isStatic()) {
             builder.append(" static");
         }

@@ -1,7 +1,7 @@
 package me.mrfunny.krab.members.method.body.expression;
 
 import me.mrfunny.krab.members.method.body.Expression;
-import me.mrfunny.krab.members.method.body.ResultiveExpression;
+import me.mrfunny.krab.members.method.body.possibilities.ResultiveExpression;
 
 public class NumberExpression extends Expression implements ResultiveExpression {
     private final Number source;

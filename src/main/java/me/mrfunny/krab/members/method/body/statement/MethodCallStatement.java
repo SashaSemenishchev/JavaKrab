@@ -1,7 +1,9 @@
 package me.mrfunny.krab.members.method.body.statement;
 
-import me.mrfunny.krab.members.method.JavaMethod;
 import me.mrfunny.krab.members.method.body.*;
+import me.mrfunny.krab.members.method.body.possibilities.Callable;
+import me.mrfunny.krab.members.method.body.possibilities.FieldAccessible;
+import me.mrfunny.krab.members.method.body.possibilities.ResultiveExpression;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -19,7 +21,7 @@ public class MethodCallStatement extends Statement implements Callable, FieldAcc
         StringBuilder sb = new StringBuilder(name).append("(");
         Iterator<Expression> iterator = Arrays.stream(arguments).iterator();
         while(iterator.hasNext()) {
-            sb.append(iterator.next().toJavaCode());
+            sb.append(Expression.toString(iterator.next()));
             if(iterator.hasNext()) {
                 sb.append(",");
             }

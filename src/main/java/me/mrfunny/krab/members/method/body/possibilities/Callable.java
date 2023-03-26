@@ -1,6 +1,8 @@
-package me.mrfunny.krab.members.method.body;
+package me.mrfunny.krab.members.method.body.possibilities;
 
 import me.mrfunny.krab.members.method.JavaMethod;
+import me.mrfunny.krab.members.method.body.Expression;
+import me.mrfunny.krab.members.method.body.MemberPathExpression;
 import me.mrfunny.krab.members.method.body.statement.MethodCallStatement;
 
 public interface Callable extends MemberPathExpression, Comparable {

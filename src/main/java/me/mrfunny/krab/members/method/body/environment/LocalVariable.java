@@ -62,7 +62,7 @@ public class LocalVariable implements MethodBodyPart {
                 .append(" ")
                 .append(name);
         if(initializer != null) {
-            sb.append("=").append(initializer.toJavaCode());
+            sb.append("=").append(Expression.toString(initializer));
         } else if(isFinal) {
             throw new KrabException(null, "Uninitialized final variable");
         }

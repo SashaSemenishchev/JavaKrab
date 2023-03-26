@@ -1,6 +1,6 @@
 package me.mrfunny.krab.members.method.body;
 
-import me.mrfunny.krab.JavaObject;
+import me.mrfunny.krab.common.JavaObject;
 import me.mrfunny.krab.members.method.MethodScope;
 
 import java.util.Arrays;

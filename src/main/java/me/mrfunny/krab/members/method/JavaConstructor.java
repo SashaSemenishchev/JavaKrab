@@ -2,15 +2,13 @@ package me.mrfunny.krab.members.method;
 
 import me.mrfunny.krab.Krab;
 import me.mrfunny.krab.members.AccessModifier;
-import me.mrfunny.krab.members.Accessible;
 import me.mrfunny.krab.members.common.Type;
 import me.mrfunny.krab.members.method.body.Body;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
-
 public class JavaConstructor extends JavaMethod {
-    public JavaConstructor(Krab source, AccessModifier accessModifier, Body methodBody) {
+    public JavaConstructor(Krab source, AccessModifier accessModifier, Body body) {
         super(accessModifier, null,false, false, source.getName());
+        this.body = body;
     }
 
     @Override
@@ -31,7 +29,8 @@ public class JavaConstructor extends JavaMethod {
 
     @Override
     public String toJavaCode() {
-        StringBuilder sb = new StringBuilder(createAccessString());
+        StringBuilder sb = new StringBuilder(accessModifier.toJavaCode())
+            .append(" ").append(source.getName());
         generateArguments(sb);
         sb.append(body.toJavaCode());
 

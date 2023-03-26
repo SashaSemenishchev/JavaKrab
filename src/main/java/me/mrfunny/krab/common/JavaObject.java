@@ -1,6 +1,5 @@
-package me.mrfunny.krab;
+package me.mrfunny.krab.common;
 
-import com.google.googlejavaformat.java.Formatter;
 import com.google.googlejavaformat.java.FormatterException;
 
 public interface JavaObject {
@@ -11,7 +10,7 @@ public interface JavaObject {
     default String toPrettyJavaCode() {
         String code = toJavaCode();
         try {
-            return new Formatter().formatSource(code);
+            return ConstantPool.formatter.formatSource(code);
         } catch (FormatterException e) {
             e.printStackTrace();
         }

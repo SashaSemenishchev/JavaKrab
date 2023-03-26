@@ -1,25 +1,24 @@
 package me.mrfunny.krab.members.method.body.expression;
 
+import me.mrfunny.krab.members.method.body.possibilities.Concatenable;
 import me.mrfunny.krab.members.method.body.possibilities.Callable;
 import me.mrfunny.krab.members.method.body.Expression;
-import me.mrfunny.krab.members.method.body.possibilities.FieldAccessible;
 import me.mrfunny.krab.members.method.body.possibilities.ResultiveExpression;
 
-public class LocalVariableAccessExpression
-        extends Expression
-        implements ResultiveExpression, Callable, FieldAccessible {
-    private final String name;
+public class StringExpression extends Expression implements Callable, ResultiveExpression {
 
-    public LocalVariableAccessExpression(String name) {
-        this.name = name;
+    private final String value;
+
+    public StringExpression(String value) {
+        this.value = value;
     }
     @Override
     public String toJavaCode() {
-        return name;
+        return value == null ? "null" : '"' + value + '"';
     }
 
     @Override
     public Class<?> getExpressionResult() {
-        return Object.class;
+        return String.class;
     }
 }

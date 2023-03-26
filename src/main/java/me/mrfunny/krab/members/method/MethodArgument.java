@@ -1,6 +1,6 @@
 package me.mrfunny.krab.members.method;
 
-import me.mrfunny.krab.JavaObject;
+import me.mrfunny.krab.common.JavaObject;
 import me.mrfunny.krab.members.common.Type;
 
 public class MethodArgument implements JavaObject {

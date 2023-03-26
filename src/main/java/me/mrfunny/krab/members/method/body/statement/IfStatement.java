@@ -2,6 +2,8 @@ package me.mrfunny.krab.members.method.body.statement;
 
 import me.mrfunny.krab.exception.KrabException;
 import me.mrfunny.krab.members.method.body.*;
+import me.mrfunny.krab.members.method.body.possibilities.BranchableStatement;
+import me.mrfunny.krab.members.method.body.possibilities.ResultiveExpression;
 
 import java.util.ArrayList;
 
@@ -55,7 +57,7 @@ public class IfStatement extends Statement implements BranchableStatement {
         if(classOfResult != boolean.class && classOfResult != Object.class) {
             throw new KrabException(null, "If statement branches should always result a boolean.");
         }
-        sb.append(Expression.rootExpressionToJavaCode(branch.matcher));
+        sb.append(Expression.toString(branch.matcher));
         sb.append(")");
         sb.append(branch.branch.toJavaCode());
     }
