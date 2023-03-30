@@ -1,6 +1,8 @@
 package me.mrfunny.krab.members.method.body.expression;
 
-public enum ComparisonMode {
+import me.mrfunny.krab.common.JavaObject;
+
+public enum ComparisonMode implements JavaObject {
     EQUALS("=="), NOT_EQUALS("!="), MORE("<"), LESS(">"), MORE_OR_EQUALS("<="), LESS_OR_EQUALS(">=");
 
     private final String javaCode;
@@ -9,7 +11,13 @@ public enum ComparisonMode {
         this.javaCode = javaCode;
     }
 
-    public String getJavaCode() {
+    @Override
+    public String toJavaCode() {
         return javaCode;
+    }
+
+    @Override
+    public String toPrettyJavaCode() {
+        return this.toJavaCode();
     }
 }

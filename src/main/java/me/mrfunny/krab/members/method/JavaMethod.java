@@ -1,7 +1,7 @@
 package me.mrfunny.krab.members.method;
 
 import me.mrfunny.krab.exception.KrabException;
-import me.mrfunny.krab.members.Abstractable;
+import me.mrfunny.krab.members.method.body.possibilities.Abstractable;
 import me.mrfunny.krab.members.AccessModifier;
 import me.mrfunny.krab.members.ClassMember;
 import me.mrfunny.krab.members.common.Type;
@@ -66,7 +66,7 @@ public class JavaMethod extends ClassMember<JavaMethod> implements Abstractable<
     }
 
     @Override
-    public String createAccessString() {
+    protected String createAccessString() {
         StringBuilder builder = new StringBuilder(getAccessModifier().toJavaCode());
         if(isStatic()) {
             builder.append(" static");
@@ -113,5 +113,13 @@ public class JavaMethod extends ClassMember<JavaMethod> implements Abstractable<
 
     public static JavaMethod of(String name, Type returnType) {
         return new JavaMethod(AccessModifier.PACKAGE_PRIVATE, returnType, false, false, name);
+    }
+
+    public static JavaMethod ofInterface(String name, Type returnType) {
+        return new InterfaceMethod(returnType, false, name);
+    }
+
+    public static JavaMethod ofInterface(String name, Type returnType, Body defaultImpl) {
+        return new InterfaceMethod(returnType, false, name, defaultImpl);
     }
 }

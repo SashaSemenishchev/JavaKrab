@@ -2,7 +2,7 @@ package me.mrfunny.krab.members.method.body;
 
 import me.mrfunny.krab.members.common.Type;
 import me.mrfunny.krab.members.method.JavaMethod;
-import me.mrfunny.krab.members.method.body.environment.LocalVariable;
+import me.mrfunny.krab.members.method.MethodScope;
 import me.mrfunny.krab.members.method.body.expression.*;
 import me.mrfunny.krab.members.method.body.statement.*;
 
@@ -33,6 +33,69 @@ public class Components {
 
     public static IfStatement ifStatement(IfStatement.ConditionBranch baseConditionBranch) {
         return new IfStatement(baseConditionBranch);
+    }
+
+    public static ForLoopStatement forLoop() {
+        return new ForLoopStatement(null, null, null, null);
+    }
+    public static ForLoopStatement forLoop(
+        LocalVariableDeclarationStatement declaration,
+        Expression checker,
+        Expression incrementer
+    ) {
+        return new ForLoopStatement(declaration, checker, incrementer, null);
+    }
+
+    public static ForeachLoopStatement foreachLoop() {
+        return new ForeachLoopStatement(null, null, null);
+    }
+
+    public static ForeachLoopStatement foreachLoop(
+        LocalVariableDeclarationStatement localVariable,
+        Expression looper
+    ) {
+        return new ForeachLoopStatement(localVariable, looper, null);
+    }
+
+    public static ForeachLoopStatement foreachLoop(
+        LocalVariableDeclarationStatement localVariable,
+        Expression looper,
+        MethodScope scope
+    ) {
+        return new ForeachLoopStatement(localVariable, looper, scope);
+    }
+
+    public static ForLoopStatement forLoop(
+        LocalVariableDeclarationStatement declaration,
+        Expression checker,
+        Expression incrementer,
+        MethodScope scope
+    ) {
+        return new ForLoopStatement(declaration, checker, incrementer, scope);
+    }
+
+    public static DoWhileLoopStatement doWhileLoop(MethodScope body, Expression condition) {
+        return new DoWhileLoopStatement(condition, body);
+    }
+
+    public static DoWhileLoopStatement doWhileLoop(Expression condition) {
+        return new DoWhileLoopStatement(condition, null);
+    }
+
+    public static DoWhileLoopStatement doWhileLoop() {
+        return new DoWhileLoopStatement(null, null);
+    }
+
+    public static WhileLoopStatement whileLoop(Expression condition, MethodScope body) {
+        return new WhileLoopStatement(condition, body);
+    }
+
+    public static WhileLoopStatement whileLoop(Expression condition) {
+        return new WhileLoopStatement(condition, null);
+    }
+
+    public static WhileLoopStatement whileLoop() {
+        return new WhileLoopStatement(null, null);
     }
 
     public static ComparisonExpression compare(
@@ -67,13 +130,6 @@ public class Components {
         return new LocalVariableAssignStatement(name, value);
     }
 
-    public static LocalVariableAssignStatement assignLocalVariable(
-        LocalVariable localVariable,
-        Expression value
-    ) {
-        return new LocalVariableAssignStatement(localVariable.getName(), value);
-    }
-
     public static MethodCallStatement call(String name, Expression... arguments) {
         return new MethodCallStatement(name, arguments);
     }
@@ -97,7 +153,7 @@ public class Components {
     }
 
     public static Expression nullVal() {
-        return DefinedExpression.of("null");
+        return DefinedStatement.of("null");
     }
 
     public static NewInstanceStatement newInstance(Type type, Expression... arguments) {

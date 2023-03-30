@@ -32,7 +32,7 @@ public class ComparisonExpression extends Expression implements ResultiveExpress
 
     @Override
     public String toJavaCode() {
-        return Expression.toString(expression1) + comparisonMode.getJavaCode() + Expression.toString(expression2);
+        return Expression.toString(expression1) + comparisonMode.toJavaCode() + Expression.toString(expression2);
     }
 
     @Override

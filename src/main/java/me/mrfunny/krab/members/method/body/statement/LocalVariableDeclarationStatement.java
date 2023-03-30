@@ -3,10 +3,8 @@ package me.mrfunny.krab.members.method.body.statement;
 import me.mrfunny.krab.members.common.Type;
 import me.mrfunny.krab.members.method.body.Expression;
 import me.mrfunny.krab.members.method.body.Statement;
-import me.mrfunny.krab.members.method.body.environment.LocalVariable;
 
 public class LocalVariableDeclarationStatement extends Statement {
-    private LocalVariable wrapper = null;
     private boolean isFinal;
     private Type typeOf;
     private String name;
@@ -31,7 +29,7 @@ public class LocalVariableDeclarationStatement extends Statement {
         return this;
     }
 
-    public LocalVariableDeclarationStatement setDeclaration(Expression declaration) {
+    public LocalVariableDeclarationStatement setInitializer(Expression declaration) {
         this.declaration = declaration;
         return this;
     }
@@ -62,16 +60,11 @@ public class LocalVariableDeclarationStatement extends Statement {
         return this;
     }
 
-    public LocalVariableDeclarationStatement(LocalVariable variable) {
-        this(variable.getType(), variable.getName(), variable.getInitializer(), variable.isFinal());
-        this.wrapper = variable;
-    }
     @Override
     public String toJavaCode() {
-        if(wrapper != null) {
-            return wrapper.toJavaCode();
-        }
-        StringBuilder sb = new StringBuilder(typeOf.toJavaCode()).append(" ").append(name);
+        StringBuilder sb = new StringBuilder(isFinal ? "final " : "")
+            .append(typeOf.toJavaCode())
+            .append(" ").append(name);
         if(declaration != null) {
             sb.append("=").append(Expression.toString(declaration));
         }

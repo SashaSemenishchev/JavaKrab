@@ -6,6 +6,7 @@ import me.mrfunny.krab.common.ClassType;
 import me.mrfunny.krab.exception.KrabException;
 import me.mrfunny.krab.members.*;
 import me.mrfunny.krab.members.common.Type;
+import me.mrfunny.krab.members.method.InterfaceMethod;
 import me.mrfunny.krab.members.method.JavaMethod;
 import me.mrfunny.krab.members.method.MethodArgument;
 import me.mrfunny.krab.members.method.body.Body;
@@ -65,6 +66,9 @@ class KrabImpl extends Accessible<Krab> implements Krab {
 
     @Override
     public void addMember(ClassMember<?> member) {
+        if(member instanceof InterfaceMethod && classType != ClassType.INTERFACE) {
+            throw new KrabException(this, "Can't add an interface method to non-interface class");
+        }
         member.setSource(this);
         this.classMembers.add(member);
     }
@@ -133,7 +137,7 @@ class KrabImpl extends Accessible<Krab> implements Krab {
     }
 
     @Override
-    public String createAccessString() {
+    protected String createAccessString() {
         StringBuilder builder = new StringBuilder(getAccessModifier().toJavaCode());
         if(isStatic()) {
             builder.append(" static");
@@ -147,7 +151,7 @@ class KrabImpl extends Accessible<Krab> implements Krab {
             builder.append(" abstract");
         }
 
-        builder.append(" ").append(classType.name().toLowerCase()).append(" ").append(getName());
+        builder.append(" ").append(classType.toJavaCode()).append(" ").append(getName());
         return builder.toString();
     }
 

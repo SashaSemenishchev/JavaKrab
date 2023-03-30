@@ -2,7 +2,7 @@ package me.mrfunny.krab;
 
 import me.mrfunny.krab.common.ClassType;
 import me.mrfunny.krab.common.JavaObject;
-import me.mrfunny.krab.members.Abstractable;
+import me.mrfunny.krab.members.method.body.possibilities.Abstractable;
 import me.mrfunny.krab.members.AccessModifier;
 import me.mrfunny.krab.members.ClassMember;
 import me.mrfunny.krab.members.JavaField;

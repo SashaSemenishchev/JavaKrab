@@ -45,7 +45,7 @@ public class JavaField extends ClassMember<JavaField> {
     }
 
     @Override
-    public String createAccessString() {
+    protected String createAccessString() {
         StringBuilder builder = new StringBuilder(getAccessModifier().toJavaCode());
         if(isStatic()) {
             builder.append(" static");

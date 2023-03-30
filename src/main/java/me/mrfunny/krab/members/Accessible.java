@@ -1,6 +1,8 @@
 package me.mrfunny.krab.members;
 
-public abstract class Accessible<T> {
+import me.mrfunny.krab.common.JavaObject;
+
+public abstract class Accessible<T> implements JavaObject {
 
     public Accessible(AccessModifier accessModifier, boolean isFinal, boolean isStatic, String name) {
         this.accessModifier = accessModifier;
@@ -39,7 +41,7 @@ public abstract class Accessible<T> {
         return isFinal;
     }
 
-    public String createAccessString() {
+    protected String createAccessString() {
         StringBuilder builder = new StringBuilder(getAccessModifier().toJavaCode());
         if(isStatic()) {
             builder.append(" static");
@@ -51,5 +53,10 @@ public abstract class Accessible<T> {
 
         builder.append(" ").append(getName());
         return builder.toString();
+    }
+
+    @Override
+    public String toJavaCode() {
+        return createAccessString();
     }
 }

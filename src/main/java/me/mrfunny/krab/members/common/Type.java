@@ -40,4 +40,14 @@ public abstract class Type
     public static final Type CHAR = Type.of("char");
     public static final Type SHORT = Type.of("short");
     public static final Type BOOLEAN = Type.of("boolean");
+    public static final Type DOUBLE = Type.of("double");
+    public static final Type FLOAT = Type.of("float");
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(!(obj instanceof Type)) return false;
+
+        return toJavaCode().equals(((Type)obj).toJavaCode());
+    }
 }

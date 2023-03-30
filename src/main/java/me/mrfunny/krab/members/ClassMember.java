@@ -1,12 +1,12 @@
 package me.mrfunny.krab.members;
 
 import me.mrfunny.krab.Krab;
-import me.mrfunny.krab.common.JavaObject;
 import me.mrfunny.krab.members.common.Type;
+import me.mrfunny.krab.members.method.body.possibilities.Typeable;
 
 public abstract class ClassMember<T extends ClassMember<T>>
         extends Accessible<T>
-        implements JavaObject, Typeable {
+    implements Typeable {
 
     protected Type type;
     protected Krab source = null;

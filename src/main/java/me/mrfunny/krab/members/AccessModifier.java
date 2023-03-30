@@ -3,7 +3,10 @@ package me.mrfunny.krab.members;
 import me.mrfunny.krab.common.JavaObject;
 
 public enum AccessModifier implements JavaObject {
-    PUBLIC("public"), PRIVATE("private"), PROTECTED("protected"), PACKAGE_PRIVATE("");
+    PUBLIC("public"),
+    PRIVATE("private"),
+    PROTECTED("protected"),
+    PACKAGE_PRIVATE("");
 
     private final String javaName;
 
@@ -14,5 +17,10 @@ public enum AccessModifier implements JavaObject {
     @Override
     public String toJavaCode() {
         return javaName;
+    }
+
+    @Override
+    public String toPrettyJavaCode() {
+        return this.toJavaCode();
     }
 }

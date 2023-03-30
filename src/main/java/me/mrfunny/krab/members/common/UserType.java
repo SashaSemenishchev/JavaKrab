@@ -11,4 +11,9 @@ public class UserType extends Type {
     public String toJavaCode() {
         return type;
     }
+
+    @Override
+    public String toPrettyJavaCode() {
+        return this.toJavaCode();
+    }
 }

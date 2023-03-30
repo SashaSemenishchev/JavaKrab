@@ -11,15 +11,18 @@ public String generateSource() {
         .setAbstract(true)
         .addField(JavaField.of("world", Type.of("java.lang.String"))
             .access(AccessModifier.PRIVATE)
-            .setInitializer(DefinedExpression.of("\"Hello, world!\""))
+            .setInitializer(string("Hello, World!"))
             .setFinal(true)
         )
         .addField(JavaField.of("test", Type.of(int.class))
             .access(AccessModifier.PROTECTED)
-            .setInitializer(DefinedExpression.of("0"))
+            .setInitializer(
+                newInstance(Type.of(Random.class))
+                    .call("nextInt", num(100))
+    )
         )
         .addInnerClass(Krab.innerClass("Hello")
-            .addField(JavaField.of("name", Type.of(String.class)))
+            .addField(JavaField.of("name", Type.of(String.class)).setInitializer(string("heya!")))
         )
         .toPrettyJavaCode();
 }

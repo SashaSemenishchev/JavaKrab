@@ -1,4 +1,4 @@
-package me.mrfunny.krab.members;
+package me.mrfunny.krab.members.method.body.possibilities;
 
 import me.mrfunny.krab.members.common.Type;
 
