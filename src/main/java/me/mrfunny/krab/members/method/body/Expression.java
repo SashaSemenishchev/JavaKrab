@@ -3,6 +3,9 @@ package me.mrfunny.krab.members.method.body;
 import me.mrfunny.krab.common.JavaObject;
 import me.mrfunny.krab.exception.KrabException;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
 public abstract class Expression implements JavaObject, Cloneable {
     protected Expression previousExpression = null;
 
@@ -46,5 +49,18 @@ public abstract class Expression implements JavaObject, Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String toArgumentsSequence(Expression... expressions) {
+        StringBuilder sb = new StringBuilder();
+        Iterator<Expression> iterator = Arrays.stream(expressions).iterator();
+        while(iterator.hasNext()) {
+            sb.append(Expression.toString(iterator.next()));
+            if(iterator.hasNext()) {
+                sb.append(",");
+            }
+        }
+
+        return sb.toString();
     }
 }

@@ -2,9 +2,6 @@ package me.mrfunny.krab.common;
 
 import me.mrfunny.krab.members.method.body.Expression;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 public class EnumEntry implements JavaObject {
     private Expression[] initializerArgs;
     private String name;
@@ -37,15 +34,9 @@ public class EnumEntry implements JavaObject {
     public String toJavaCode() {
         StringBuilder sb = new StringBuilder(name);
         if(initializerArgs.length != 0) {
-            sb.append("(");
-            Iterator<Expression> iterator = Arrays.stream(initializerArgs).iterator();
-            while(iterator.hasNext()) {
-                sb.append(iterator.next());
-                if(iterator.hasNext()) {
-                    sb.append(",");
-                }
-            }
-            sb.append(")");
+            sb.append("(")
+                .append(Expression.toArgumentsSequence(initializerArgs))
+                .append(")");
         }
         return sb.toString();
     }
