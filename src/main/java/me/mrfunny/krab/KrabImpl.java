@@ -34,10 +34,24 @@ class KrabImpl extends Accessible<Krab> implements Krab {
         this.packageName = packageName;
     }
 
+    protected EnumKrab enumMirror = null;
+
     @Override
     public Krab setClassType(ClassType type) {
+        if(type == ClassType.ENUM) {
+            throw new UnsupportedOperationException("Use asEnum for setting this class type");
+        }
         this.classType = type;
         return this;
+    }
+
+    @Override
+    public EnumKrab asEnum() {
+        if(enumMirror != null) return enumMirror;
+        EnumKrab mirror = new EnumKrab(packageName, name, fileName, this);
+        mirror.setClassMembers(this.classMembers);
+        this.enumMirror = mirror;
+        return mirror;
     }
 
     @Override
@@ -90,7 +104,16 @@ class KrabImpl extends Accessible<Krab> implements Krab {
 
     @Override
     public String toJavaCode() {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        processHeader(sb);
+        sb.append(createAccessString())
+            .append("{");
+        processInnerMembers(sb);
+        return sb.append("}")
+            .toString();
+    }
+
+    protected void processHeader(StringBuilder stringBuilder) {
         if(!innerMode) {
             stringBuilder.append(packageName == null ? "" : "package " + packageName + ";");
             ArrayList<String> addedImports = new ArrayList<>(imports.size());
@@ -103,10 +126,9 @@ class KrabImpl extends Accessible<Krab> implements Krab {
                 stringBuilder.append("import ").append(addedImport).append(";");
             }
         }
+    }
 
-        stringBuilder.append(createAccessString());
-        stringBuilder.append("{");
-
+    protected void processInnerMembers(StringBuilder stringBuilder) {
         for(ClassMember<?> member : classMembers) {
             stringBuilder.append(member.toJavaCode());
         }
@@ -114,10 +136,6 @@ class KrabImpl extends Accessible<Krab> implements Krab {
         for (Krab innerClass : innerClasses) {
             stringBuilder.append(innerClass.toJavaCode());
         }
-
-        stringBuilder.append("}");
-
-        return stringBuilder.toString();
     }
 
     @Override
@@ -153,6 +171,11 @@ class KrabImpl extends Accessible<Krab> implements Krab {
 
         builder.append(" ").append(classType.toJavaCode()).append(" ").append(getName());
         return builder.toString();
+    }
+
+    protected KrabImpl setClassMembers(List<ClassMember<?>> classMembers) {
+        this.classMembers = classMembers;
+        return this;
     }
 
     protected static void processImports(KrabImpl source, List<String> names) {

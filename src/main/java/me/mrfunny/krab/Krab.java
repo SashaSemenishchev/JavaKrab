@@ -40,6 +40,7 @@ public interface Krab extends Abstractable<Krab>, JavaObject {
     Krab setStatic(boolean s);
     Krab setFinal(boolean f);
     Krab setAccessModifier(AccessModifier accessModifier);
+    EnumKrab asEnum();
     static Krab newSource(String packageName, String className) {
         return newSource(packageName, className, className + ".java");
     }

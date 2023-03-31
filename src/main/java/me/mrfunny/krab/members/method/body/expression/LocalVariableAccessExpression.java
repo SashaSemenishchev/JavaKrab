@@ -8,11 +8,21 @@ import me.mrfunny.krab.members.method.body.possibilities.ResultiveExpression;
 public class LocalVariableAccessExpression
         extends Expression
         implements ResultiveExpression, Callable, FieldAccessible {
-    private final String name;
+    private String name;
 
     public LocalVariableAccessExpression(String name) {
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalVariableAccessExpression setName(String name) {
+        this.name = name;
+        return this;
+    }
+
     @Override
     public String toJavaCode() {
         return name;
@@ -21,5 +31,17 @@ public class LocalVariableAccessExpression
     @Override
     public Class<?> getExpressionResult() {
         return Object.class;
+    }
+
+    public static class Immutable extends LocalVariableAccessExpression {
+
+        public Immutable(String name) {
+            super(name);
+        }
+
+        @Override
+        public LocalVariableAccessExpression setName(String name) {
+            return this;
+        }
     }
 }

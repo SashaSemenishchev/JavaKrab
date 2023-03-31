@@ -34,4 +34,16 @@ public class DefinedStatement extends Statement implements ResultiveExpression {
     public Class<?> getExpressionResult() {
         return Object.class;
     }
+
+    public static class Immutable extends DefinedStatement {
+
+        public Immutable(String expression) {
+            super(expression);
+        }
+
+        @Override
+        public DefinedStatement setExpression(String expression) {
+            return this;
+        }
+    }
 }

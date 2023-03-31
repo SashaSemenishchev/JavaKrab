@@ -11,10 +11,6 @@ public class Components {
         return new FieldAccessExpression(type, name);
     }
 
-    public static LocalVariableAccessExpression thisClass() {
-        return new LocalVariableAccessExpression("this");
-    }
-
     public static LocalVariableAccessExpression accessLocalVariable(String name) {
         return new LocalVariableAccessExpression(name);
     }
@@ -152,10 +148,6 @@ public class Components {
         return new FieldAccessExpression(name);
     }
 
-    public static Expression nullVal() {
-        return DefinedStatement.of("null");
-    }
-
     public static NewInstanceStatement newInstance(Type type, Expression... arguments) {
         return new NewInstanceStatement(type, arguments);
     }
@@ -163,4 +155,16 @@ public class Components {
     public static NewInstanceStatement newInstance(String type, Expression... arguments) {
         return newInstance(Type.of(type), arguments);
     }
+
+    private static final DefinedStatement NULL = new DefinedStatement.Immutable("null");
+    public static Expression nullVal() {return NULL;}
+
+    private static final BoolExpression TRUE = new BoolExpression.Immutable(true);
+    private static final BoolExpression FALSE = new BoolExpression.Immutable(false);
+    public static BoolExpression boolTrue() {return TRUE;}
+    public static BoolExpression boolFalse() {return FALSE;}
+    public static BoolExpression bool() {return new BoolExpression(false);}
+    private static final LocalVariableAccessExpression THIS = new LocalVariableAccessExpression.Immutable("this");
+
+    public static LocalVariableAccessExpression thisClass() {return THIS;}
 }
